@@ -1,0 +1,23 @@
+{
+  "name": "referee-list-generation",
+  "description": "Generate the list of all referees based on data from Leverade",
+  "private": true,
+  "scripts": {
+    "start": "ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "David Sandoz",
+    "email": "david.sandoz@tchoukball.ch"
+  },
+  "dependencies": {
+    "@types/tough-cookie": "^4.0.2",
+    "dotenv": "^16.0.3",
+    "fetch-cookie": "^2.1.0",
+    "node-html-parser": "^6.1.1",
+    "ts-node": "^10.9.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
