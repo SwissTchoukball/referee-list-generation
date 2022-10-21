@@ -289,7 +289,7 @@ const consolidateReferees = (
   refereeCategories: { [id: string]: LeveradeRefereeCategory }
 ): Referee[] => {
   console.log("Consolidating referees...");
-  return refereeLicenses.map((refereeLicense) => {
+  const consolidatedReferees = refereeLicenses.map((refereeLicense) => {
     const profile = profiles[refereeLicense.relationships.profile.data.id];
     if (!profile) {
       console.error(`Referee license with ID ${refereeLicense.id} has no profile attached to it`);
@@ -310,6 +310,21 @@ const consolidateReferees = (
       residence: profile.attributes.residence,
       levelId: category.id as RefereeLevel,
     };
+  });
+
+  console.log("Sort referees...");
+  return consolidatedReferees.sort((refereeA, refereeB) => {
+    let compareValue = refereeA.levelId.localeCompare(refereeB.levelId);
+
+    if (!compareValue) {
+      compareValue = refereeA.lastName.localeCompare(refereeB.lastName);
+    }
+
+    if (!compareValue) {
+      compareValue = refereeA.firstName.localeCompare(refereeB.lastName);
+    }
+
+    return compareValue;
   });
 };
 
