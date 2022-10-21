@@ -355,7 +355,7 @@ const saveRefereesData = async (referees: Referee[]): Promise<void> => {
           referee.lastName,
           referee.email,
           referee.phone,
-          referee.residence,
+          referee.residence ? `"${referee.residence}"` : null,
           getRefereeLevelRomanNumeral(referee.levelId),
         ].join(",");
       }),
