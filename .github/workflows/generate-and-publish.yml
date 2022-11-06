@@ -1,0 +1,55 @@
+name: Generate and publish
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+
+env:
+  REFEREES_DATA_FILEPATH: "./referees.csv"
+  REFEREES_PUBLIC_DATA_FILEPATH: "./referees_public.json"
+
+jobs:
+  Generate and publish lists:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 18
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v3.0.11
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Generate referee lists 📄
+        run: npm start
+
+      - name: Copy public list to server
+            uses: garygrossgarten/github-action-scp@release
+            with:
+              local: referees_public.json
+              remote: scp/~/sites/tchoukball.ch/static/external
+              host: ${{ secrets.SSH_HOST }}
+              username: ${{ secrets.SSH_USERNAME }}
+              password: ${{ secrets.SSH_PASSWORD }}
+
+      - name: Copy private list to server
+            uses: garygrossgarten/github-action-scp@release
+            with:
+              local: referees.csv
+              remote: scp/~/files/arbitrage/liste-arbitres
+              host: ${{ secrets.SSH_HOST }}
+              username: ${{ secrets.SSH_USERNAME }}
+              password: ${{ secrets.SSH_PASSWORD }}
