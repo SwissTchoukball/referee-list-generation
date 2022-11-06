@@ -18,36 +18,36 @@ let userPassword: string;
 let refereesDataFilepath: string;
 let refereesPublicDataFilepath: string;
 
-if (process.env.CLIENT_ID) {
-  clientId = process.env.CLIENT_ID;
+if (process.env.LEVERADE_CLIENT_ID) {
+  clientId = process.env.LEVERADE_CLIENT_ID;
 } else {
   console.error("Client ID is missing");
   process.exit(1);
 }
 
-if (process.env.CLIENT_SECRET) {
-  clientSecret = process.env.CLIENT_SECRET;
+if (process.env.LEVERADE_CLIENT_SECRET) {
+  clientSecret = process.env.LEVERADE_CLIENT_SECRET;
 } else {
   console.error("Client secret is missing");
   process.exit(1);
 }
 
-if (process.env.USER_ID) {
-  userId = process.env.USER_ID;
+if (process.env.LEVERADE_USER_ID) {
+  userId = process.env.LEVERADE_USER_ID;
 } else {
   console.error("User ID is missing");
   process.exit(1);
 }
 
-if (process.env.USER_EMAIL) {
-  userEmail = process.env.USER_EMAIL;
+if (process.env.LEVERADE_USER_EMAIL) {
+  userEmail = process.env.LEVERADE_USER_EMAIL;
 } else {
   console.error("User email is missing");
   process.exit(1);
 }
 
-if (process.env.USER_PASSWORD) {
-  userPassword = process.env.USER_PASSWORD;
+if (process.env.LEVERADE_USER_PASSWORD) {
+  userPassword = process.env.LEVERADE_USER_PASSWORD;
 } else {
   console.error("User password is missing");
   process.exit(1);
