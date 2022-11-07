@@ -6,6 +6,11 @@ on:
     - cron: "0 4 * * *"
 
 env:
+  LEVERADE_USER_ID: ${{ secrets.LEVERADE_USER_ID }}
+  LEVERADE_USER_EMAIL: ${{ secrets.LEVERADE_USER_EMAIL }}
+  LEVERADE_USER_PASSWORD: ${{ secrets.LEVERADE_USER_PASSWORD }}
+  LEVERADE_CLIENT_ID: ${{ secrets.LEVERADE_CLIENT_ID }}
+  LEVERADE_CLIENT_SECRET: ${{ secrets.LEVERADE_CLIENT_SECRET }}
   REFEREES_DATA_FILEPATH: "./referees.csv"
   REFEREES_PUBLIC_DATA_FILEPATH: "./referees_public.json"
 
