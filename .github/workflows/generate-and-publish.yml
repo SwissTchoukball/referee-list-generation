@@ -9,7 +9,7 @@ env:
   REFEREES_PUBLIC_DATA_FILEPATH: "./referees_public.json"
 
 jobs:
-  Generate and publish lists:
+  Generate-and-publish-lists:
     runs-on: ubuntu-latest
 
     steps:
