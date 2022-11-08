@@ -43,7 +43,7 @@ jobs:
         run: npm start
 
       - name: Copy public list to server
-        uses: garygrossgarten/github-action-scp@v0.7.3
+        uses: garygrossgarten/github-action-scp@v0.8.0
         with:
           local: referees_public.json
           remote: scp/~/sites/tchoukball.ch/static/external
@@ -52,7 +52,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
 
       - name: Copy private list to server
-        uses: garygrossgarten/github-action-scp@v0.7.3
+        uses: garygrossgarten/github-action-scp@v0.8.0
         with:
           local: referees.csv
           remote: scp/~/files/arbitrage/liste-arbitres
