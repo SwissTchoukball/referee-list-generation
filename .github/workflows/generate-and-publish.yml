@@ -46,7 +46,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@v0.8.0
         with:
           local: referees_public.json
-          remote: scp/~/sites/tchoukball.ch/static/external
+          remote: sites/tchoukball.ch/static/external/referees_public.json
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
@@ -55,7 +55,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@v0.8.0
         with:
           local: referees.csv
-          remote: scp/~/files/arbitrage/liste-arbitres
+          remote: files/arbitrage/liste-arbitres/referees.csv
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
