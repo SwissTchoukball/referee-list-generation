@@ -124,7 +124,7 @@ const getRequestToken = async (): Promise<string> => {
       }),
     {
       redirect: "manual",
-    }
+    },
   );
 
   // Checking if the response already contains the request token. This can happen if we're already authorized.
@@ -250,12 +250,12 @@ const getRefereePage = async (accessToken: string, page: number = 1, amount: num
         Authorization: `Bearer ${accessToken}`,
         Accept: "application/vnd.api+json",
       },
-    }
+    },
   );
 };
 
 const distributeEntities = (
-  refereeLicensesResponseContent: LeveradeRefereeLicensesResponseContent
+  refereeLicensesResponseContent: LeveradeRefereeLicensesResponseContent,
 ): {
   refereeLicenses: LeveradeRefereeLicense[];
   profiles: { [id: string]: LeveradeProfile };
@@ -286,7 +286,7 @@ const distributeEntities = (
 const consolidateReferees = (
   refereeLicenses: LeveradeRefereeLicense[],
   profiles: { [id: string]: LeveradeProfile },
-  refereeCategories: { [id: string]: LeveradeRefereeCategory }
+  refereeCategories: { [id: string]: LeveradeRefereeCategory },
 ): Referee[] => {
   console.log("Consolidating referees...");
   const consolidatedReferees = refereeLicenses.map((refereeLicense) => {
