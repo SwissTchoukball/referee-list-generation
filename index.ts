@@ -365,14 +365,14 @@ const saveRefereesData = async (referees: Referee[]): Promise<void> => {
 
 const getRefereeLevelRomanNumeral = (levelId: RefereeLevel): string => {
   switch (levelId) {
+    case RefereeLevel.ZERO:
+      return "0";
     case RefereeLevel.I:
       return "I";
     case RefereeLevel.II:
       return "II";
     case RefereeLevel.III:
       return "III";
-    case RefereeLevel.IV:
-      return "IV";
     default:
       return "N/A";
   }
@@ -462,10 +462,10 @@ interface Referee {
 }
 
 enum RefereeLevel {
-  I = "305",
-  II = "304",
-  III = "303",
-  IV = "302",
+  ZERO = "305",
+  I = "304",
+  II = "303",
+  III = "302",
 }
 
 run();
