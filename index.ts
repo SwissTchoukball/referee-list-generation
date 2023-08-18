@@ -240,7 +240,7 @@ const getRefereePage = async (accessToken: string, page: number = 1, amount: num
   return await fetch(
     `${API_URL}/licenses?` +
       new URLSearchParams({
-        filter: "type:referee",
+        filter: "type:referee,canceled:null",
         include: "profile,refereecategory",
         "page[number]": page.toString(),
         "page[size]": amount.toString(),
