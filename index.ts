@@ -289,28 +289,34 @@ const consolidateReferees = (
   refereeCategories: { [id: string]: LeveradeRefereeCategory },
 ): Referee[] => {
   console.log("Consolidating referees...");
-  const consolidatedReferees = refereeLicenses.map((refereeLicense) => {
-    const profile = profiles[refereeLicense.relationships.profile.data.id];
-    if (!profile) {
-      console.error(`Referee license with ID ${refereeLicense.id} has no profile attached to it`);
-    }
+  const consolidatedReferees = refereeLicenses
+    .filter(
+      (refereeLicense) =>
+        // We filter them out here instead of the request to the API, because the filter parameter of the API request can only do AND, and not OR.
+        refereeLicense.attributes.expiration === null || refereeLicense.attributes.expiration > "2024-07-01",
+    )
+    .map((refereeLicense) => {
+      const profile = profiles[refereeLicense.relationships.profile.data.id];
+      if (!profile) {
+        console.error(`Referee license with ID ${refereeLicense.id} has no profile attached to it`);
+      }
 
-    const category = refereeCategories[refereeLicense.relationships.refereecategory.data.id];
-    if (!category) {
-      console.error(`Referee license with ID ${refereeLicense.id} has no referee category attached to it`);
-    }
+      const category = refereeCategories[refereeLicense.relationships.refereecategory.data.id];
+      if (!category) {
+        console.error(`Referee license with ID ${refereeLicense.id} has no referee category attached to it`);
+      }
 
-    return {
-      id: refereeLicense.id,
-      inactive: !!refereeLicense.attributes.custom_fields.inactive,
-      firstName: profile.attributes.first_name,
-      lastName: profile.attributes.last_name,
-      email: profile.attributes.email,
-      phone: profile.attributes.phone,
-      residence: profile.attributes.residence,
-      levelId: category.id as RefereeLevel,
-    };
-  });
+      return {
+        id: refereeLicense.id,
+        inactive: !!refereeLicense.attributes.custom_fields.inactive,
+        firstName: profile.attributes.first_name,
+        lastName: profile.attributes.last_name,
+        email: profile.attributes.email,
+        phone: profile.attributes.phone,
+        residence: profile.attributes.residence,
+        levelId: category.id as RefereeLevel,
+      };
+    });
 
   console.log("Sort referees...");
   return consolidatedReferees.sort((refereeA, refereeB) => {
@@ -421,6 +427,8 @@ interface LeveradeRefereeLicense extends LeveradeEntity {
   type: "license";
   attributes: {
     type: "referee";
+    cancelled: null | string;
+    expiration: null | string;
     custom_fields: {
       inactive: boolean;
     };
