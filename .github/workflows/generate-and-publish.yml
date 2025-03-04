@@ -23,13 +23,13 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v3.5.1
+        uses: actions/setup-node@v4.2.0
         with:
-          node-version: 18
+          node-version: 22
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v3.0.11
+        uses: actions/cache@v4.2.2
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -43,7 +43,7 @@ jobs:
         run: npm start
 
       - name: Copy public list to server
-        uses: garygrossgarten/github-action-scp@v0.8.0
+        uses: garygrossgarten/github-action-scp@v0.9.0
         with:
           local: referees_public.json
           remote: files/arbitrage/liste-arbitres/referees_public.json
@@ -52,7 +52,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
 
       - name: Copy private list to server
-        uses: garygrossgarten/github-action-scp@v0.8.0
+        uses: garygrossgarten/github-action-scp@v0.9.0
         with:
           local: referees.csv
           remote: files/arbitrage/liste-arbitres/privee/referees.csv
