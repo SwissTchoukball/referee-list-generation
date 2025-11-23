@@ -47,15 +47,17 @@ jobs:
         with:
           local: referees_public.json
           remote: files/arbitrage/liste-arbitres/referees_public.json
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          host: ${{vars.INFOMANIAK_SSH_HOST}}
+          username: ${{ vars.INFOMANIAK_SSH_USERNAME }}
+          privateKey: ${{ secrets.INFOMANIAK_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.INFOMANIAK_SSH_PASSPHRASE }}
 
       - name: Copy private list to server
         uses: garygrossgarten/github-action-scp@release
         with:
           local: referees.csv
           remote: files/arbitrage/liste-arbitres/privee/referees.csv
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          host: ${{vars.INFOMANIAK_SSH_HOST}}
+          username: ${{ vars.INFOMANIAK_SSH_USERNAME }}
+          privateKey: ${{ secrets.INFOMANIAK_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.INFOMANIAK_SSH_PASSPHRASE }}
